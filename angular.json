@@ -124,6 +124,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "PriceCalculator"
+    }
+  },
+  "defaultProject": "PriceCalculator",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "css"
+    }
+  }
 }

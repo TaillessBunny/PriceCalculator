@@ -1,0 +1,50 @@
+<h2 [style.color]="'orange'">Style binding :3</h2>
+<h2 [style.color]="hasError ? 'red' : 'green'">Style binding :3</h2>
+<button (click)="onClick()">Change color</button>
+<br>
+<input [(ngModel)]="name" type="text">
+<p>{{name}}</p>
+
+<div *ngIf="hasError; then ifBlock; else elseBlock"></div>
+
+<ng-template #ifBlock>
+    <h1>
+        If
+    </h1>    
+</ng-template>
+
+<ng-template #elseBlock>
+    <h1>
+        Else!
+    </h1>
+</ng-template>
+
+<div [ngSwitch]="color" [style.color] = "color">
+    <div *ngSwitchCase="'red'">Red was chosen!</div>
+    <div *ngSwitchCase="'blue'">Blue was chosen!</div>
+    <div *ngSwitchCase="'green'">Green was chosen!</div>
+    <div *ngSwitchDefault>Nothing</div>
+</div>
+
+<h2 [style.color] = "color">{{color}} was chosen!</h2>
+
+<div *ngFor="let c of colors index as i">
+    <h2 [style.color] = "c">{{i + 1}}.-{{c}}!!</h2>
+</div>
+
+<h2>Hello {{myName}}</h2>
+<h2>Hello {{myName | lowercase}}</h2>
+<h2>Hello {{myName | uppercase}}</h2>
+<h2>Hello {{message | titlecase}}</h2>
+<h2>{{message | slice:3:6}}</h2>
+
+<h2>{{3.14159 | number:'1.2-3'}}</h2>
+<h2>{{3.14159 | number:'3.4-5'}}</h2>
+<h2>{{3.14159 | percent}}</h2>
+
+<h2>{{3.14159 | currency}}</h2>
+<h2>{{date | date:'short'}}</h2>
+<h2>{{date | date:'shortDate'}}</h2>
+<h2>{{date | date:'shortTime'}}</h2>
+<h2>{{date | date:'medium'}}</h2>
+<h2>{{date | date:'long'}}</h2>

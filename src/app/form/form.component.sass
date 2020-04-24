@@ -1,0 +1,20 @@
+$textColor: red
+$bgColor: pink
+$weights:("regular": 400, "medium": 500, "bold": 700)
+    
+p
+    color: $textColor
+    background: $bgColor
+
+body
+    background: $bgColor
+    font-weight: map-get($weights, bold)
+
+.text-success
+    color: green
+
+.text-danger
+    color: red
+
+.text-special
+    font-style: italic

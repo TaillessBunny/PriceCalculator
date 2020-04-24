@@ -1,21 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!!!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<body>
+  <div class="container-fluid">
+    <h1>Welcome to TaillessBunny Price Calculator!</h1>
 
-<router-outlet></router-outlet>
+    <form #userForm="ngForm">
+      {{userForm.value | json}}
+
+      <div class="form-group">
+        <label>How many panels would you like?</label>
+        <input [(ngModel)]="panelCount" (change)="panelCountChanged()" 
+        name="panelCount" type="number" min="1" class="form-control1" ngModel>
+      </div>
+
+      <div class="form-group">
+        <label>Which Quality?</label>
+        <select name="quality" class="custom-select" ngModel>
+          <option *ngFor="let q of qualities">{{q}}</option>
+        </select>
+      </div>
+      
+      <div *ngFor="let i of [].constructor(panelCount) index as n">
+        <h2>Panel {{n+1}}:</h2>
+        
+        <div ngModelGroup="panel{{n}}">
+          <div class="dropdown">
+            <label>How complex is the background?</label>
+            <select name="bgComplexity{{n}}" class="custom-select" ngModel>
+              <option *ngFor="let c of bgComplexities">{{c}}</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>How many characters in this panel?</label>
+            <input name="charCount{{n}}" (change)="setCharArray(n,$event.target.value)" 
+            type="number" class="form-control1" min="0" ngModel>
+          </div>
+
+          <div *ngFor="let j of [].constructor(this.charCountPanel[n]) index as m">
+            <h3>Character {{m+1}}:</h3>
+            <div ngModelGroup="character{{m}}">
+              <div class="dropdown">
+                <label>How visible is this character?</label>
+                <select name="visibility" class="custom-select" ngModel>
+                  <option *ngFor="let v of visibilities">{{v}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>How many extra windows in this panel?</label>
+            <input name="windowCount{{n}}" type="number" class="form-control1" ngModel>
+          </div>
+          
+          <div class="form-group">
+            <label>How many animated actions in this panel?</label>
+            <input name="animatedCount{{n}}" type="number" class="form-control1" ngModel>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
