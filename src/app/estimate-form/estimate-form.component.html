@@ -1,6 +1,6 @@
 <body>
     <h1>Welcome to TaillessBunny Price Calculator!</h1>
-    {{estimateForm.value | json}}
+    <!--{{estimateForm.value | json}}-->
 
     <div class="container-fluid">
         <form [formGroup]="estimateForm">
@@ -25,7 +25,7 @@
             </div>
             
             <div formArrayName="extraPanels" *ngFor="let extraPanel of 
-            estimateForm.get('extraPanels').controls index as n">
+            extraPanels.controls index as n">
                 <div [formGroupName]="n">
                     <h2>Panel {{n + 1}}:</h2>
 
@@ -48,8 +48,8 @@
                         (change)="setCharacterCount(n,$event.target.value)">
                     </div>
 
-                    <div formArrayName="characters" *ngFor="let char of estimateForm.get(
-                        'extraPanels').controls[n].get('characters').controls index as m">
+                    <div formArrayName="characters" *ngFor="let char of 
+                    getCharacters(n).controls index as m">
                         <div [formGroupName]="m">
                             <h3>Character {{m + 1}}:</h3>
                             
@@ -84,4 +84,6 @@
             </div>
         </form>
     </div>
+
+    <h2>Total: {{price | currency:'USD'}} USD</h2>
 </body>
